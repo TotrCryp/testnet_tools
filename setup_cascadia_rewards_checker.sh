@@ -19,11 +19,14 @@ read -r -p "Continue? [y/n]" response
             read -p "Enter address (looks like cascadia123...): " address && \
             read -p "Enter validator (looks like cascadiavaloper123...): " validator && \
             read -p "Enter keyring passphrase (should look like something incomprehensible): " password && \
-            sed -i 's/^address="".*/address=$address/; s/^validator="".*/validator=$validator/; s/^password="".*/password=$password/' cascadia_rewards_checker.sh && \
-            chmod +x cascadia_rewards_checker.sh
-            crontab -l | { cat; echo "*/30 * * * * $HOME/cascadia_rewards_checker.sh"; } | crontab -
+            sed -i "s/^address=\"\".*/address=\"$address\"/"; "s/^validator=\"\".*/validator="$validator\"/"; "s/^password=\"\".*/password="$password\"/" cascadia_rewards_checker.sh && \
+            chmod +x cascadia_rewards_checker.sh  && \
+            crontab -l | { cat; echo "*/30 * * * * $HOME/cascadia_rewards_checker.sh"; } | crontab -  && \
+            echo -e "Done!"
             ;;
         *)
             echo \-e "Canceled"
             ;;
     esac
+read -p "Enter address (looks like cascadia123...): " address && \
+sed -i "s/^address=\"\".*/address=\"$address\"/" cascadia_rewards_checker.sh
