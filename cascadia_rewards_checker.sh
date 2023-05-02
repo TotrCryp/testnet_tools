@@ -19,7 +19,7 @@ if [[ $rewards -ge $min_reward ]]; then
         # Withdraw and restake the rewards
         echo "$(date): Withdrawing and restaking rewards..." | tee -a $log_file
         echo "$(date): Withdrawing:" | tee -a $log_file
-        cascadiad tx distribution withdraw-rewards $validator --from $address --gas-adjustment=1.2 --gas-prices=7aCC --commission -y <<< "$password" >> $log_file
+        cascadiad tx distribution withdraw-rewards $validator --from $address --gas-adjustment=1.2 --gas-prices=10aCC --commission -y <<< "$password" >> $log_file
         sleep 5
 	p_balance=$(cascadiad q bank balances $address)
 	a_balance=$(echo "$p_balance" | sed -n '/balances:/,/^$/p' | sed -n '2p' | sed 's/- amount: "//;s/"$//')
@@ -28,7 +28,7 @@ if [[ $rewards -ge $min_reward ]]; then
 	RestakAmount = $($balance - $min_reward)
 	if [[ $RestakAmount -ge $min_reward ]]; then
 		echo "$(date): Restaking:" | tee -a $log_file
-		cascadiad tx staking delegate $validator "$RestakAmount"aCC --from $address --gas auto --gas-adjustment=1.2 --gas-prices=10aCC -y
+		cascadiad tx staking delegate $validator "$RestakAmount"aCC --from $address --gas-adjustment=1.2 --gas-prices=10aCC -y <<< "$password" >> $log_file
 	fi
 else
         # Log that the reward amount is too low
