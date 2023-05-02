@@ -5,7 +5,7 @@ wget -q --spider $totr_logo_link
 . <(wget -qO- $totr_logo_link)
 echo -e "Setup Cascadia rewards checker..."
 cd $HOME
-wget -q --spider https://raw.githubusercontent.com/TotrCryp/testnet_tools/main/cascadia_rewards_checker.sh && \
+wget -q https://raw.githubusercontent.com/TotrCryp/testnet_tools/main/cascadia_rewards_checker.sh && \
 read -p "Enter address: " address && \
 read -p "Enter validator: " validator && \
 read -p "Enter password: " password && \
