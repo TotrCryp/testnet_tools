@@ -10,8 +10,8 @@ echo -e "Then the available balance of the address is checked and the available 
 echo -e "(as available_balance - 10000000000000000 so as not to empty the wallet),"
 echo -e "and delegation to the validator takes."
 echo -e "Logs are stored in /var/log/cascadia_rewards_checker.log"
-confirm() {
-    read -r -p "${1:-Continue? [y/n]} " response
+
+read -r -p "Continue? [y/n]" response
     case "$response" in
         [yY][eE][sS]|[yY])
             true
@@ -20,7 +20,7 @@ confirm() {
             false
             ;;
     esac
-}
+
 cd $HOME
 wget -q https://raw.githubusercontent.com/TotrCryp/testnet_tools/main/cascadia_rewards_checker.sh && \
 read -p "Enter address (looks like cascadia123...): " address && \
