@@ -9,7 +9,7 @@ wget -q --spider https://raw.githubusercontent.com/TotrCryp/testnet_tools/main/c
 read -p "Enter address: " address && \
 read -p "Enter validator: " validator && \
 read -p "Enter password: " password && \
-echo "address=$address" >> cascadia_rewards_checker.sh && \
+sed -i.bak -e "s/^address =.*/address = \"$address\"/" $HOME/cascadia_rewards_checker.sh && \
 echo "validator=$validator" >> cascadia_rewards_checker.sh && \
 echo "password=$password" >> cascadia_rewards_checker.sh && \
 chmod +x cascadia_rewards_checker.sh
