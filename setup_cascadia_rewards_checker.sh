@@ -21,7 +21,7 @@ read -r -p "Continue? [y/n]" response
             read -p "Enter password (should look like something incomprehensible): " password && \
             sed -i 's/^address="".*/address=$address/; s/^validator="".*/validator=$validator/; s/^password="".*/password=$password/' cascadia_rewards_checker.sh && \
             chmod +x cascadia_rewards_checker.sh
-            echo "*/30 * * * * $HOME/cascadia_rewards_checker.sh" | crontab -
+            crontab -l | { cat; echo "*/30 * * * * $HOME/cascadia_rewards_checker.sh"; } | crontab -
             ;;
         *)
             echo \-e "Canceled"
