@@ -24,7 +24,7 @@ read -r -p "Continue? [y/n]" response
             echo "*/30 * * * * /$HOME/cascadia_rewards_checker.sh" | crontab -
             ;;
         *)
-            echo -e "Canceled"
+            echo "Canceled"
             exit 1
             ;;
     esac
