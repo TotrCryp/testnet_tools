@@ -1,7 +1,7 @@
 #!/bin/bash
 
 totr_logo_link="https://raw.githubusercontent.com/TotrCryp/assets/main/totr_logo.sh"
-wget -q --spider $totr_logo_link
+#wget -q --spider $totr_logo_link
 . <(wget -qO- $totr_logo_link)
 echo -e "Setup Cascadia rewards checker..."
 echo -e "The script checks for claimable  rewards every 30 minutes."
