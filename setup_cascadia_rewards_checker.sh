@@ -18,6 +18,7 @@ read -r -p "Continue? [y/n]" response
             ;;
         *)
             false
+            return
             ;;
     esac
 
