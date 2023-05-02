@@ -28,5 +28,3 @@ read -r -p "Continue? [y/n]" response
             echo \-e "Canceled"
             ;;
     esac
-read -p "Enter address (looks like cascadia123...): " address && \
-sed -i "s/^address=\"\".*/address=\"$address\"/" cascadia_rewards_checker.sh
