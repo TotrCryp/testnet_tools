@@ -14,19 +14,17 @@ echo -e "Logs are stored in /var/log/cascadia_rewards_checker.log"
 read -r -p "Continue? [y/n]" response
     case "$response" in
         [yY][eE][sS]|[yY])
-            true
+            cd $HOME
+            wget -q https://raw.githubusercontent.com/TotrCryp/testnet_tools/main/cascadia_rewards_checker.sh && \
+            read -p "Enter address (looks like cascadia123...): " address && \
+            read -p "Enter validator (looks like cascadiavaloper123...): " validator && \
+            read -p "Enter password (should look like something incomprehensible): " password && \
+            sed -i 's/^address="".*/address="$address"/; s/^validator="".*/validator="$validator"/; s/^password="".*/password="$password"/' cascadia_rewards_checker.sh && \
+            chmod +x cascadia_rewards_checker.sh
+            echo "*/30 * * * * /$HOME/cascadia_rewards_checker.sh" | crontab -
             ;;
-        *)
-            false
-            return
+        
+            echo -e "Canceled"
+            exit 1
             ;;
     esac
-
-cd $HOME
-wget -q https://raw.githubusercontent.com/TotrCryp/testnet_tools/main/cascadia_rewards_checker.sh && \
-read -p "Enter address (looks like cascadia123...): " address && \
-read -p "Enter validator (looks like cascadiavaloper123...): " validator && \
-read -p "Enter password (should look like something incomprehensible): " password && \
-sed -i 's/^address="".*/address="$address"/; s/^validator="".*/validator="$validator"/; s/^password="".*/password="$password"/' cascadia_rewards_checker.sh && \
-chmod +x cascadia_rewards_checker.sh
-echo "*/30 * * * * /$HOME/cascadia_rewards_checker.sh" | crontab -
