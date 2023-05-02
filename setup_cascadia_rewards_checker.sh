@@ -23,7 +23,7 @@ read -r -p "Continue? [y/n]" response
             chmod +x cascadia_rewards_checker.sh
             echo "*/30 * * * * /$HOME/cascadia_rewards_checker.sh" | crontab -
             ;;
-        
+        *)
             echo -e "Canceled"
             exit 1
             ;;
