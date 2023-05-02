@@ -25,6 +25,5 @@ read -r -p "Continue? [y/n]" response
             ;;
         *)
             echo \-e "Canceled"
-            exit 1
             ;;
     esac
