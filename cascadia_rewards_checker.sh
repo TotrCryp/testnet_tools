@@ -7,13 +7,19 @@ PATH=$PATH:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/snap/bi
 address=""
 validator=""
 password=""
-min_reward="500000000000000"  # Minimum reward amount to withdraw and restake in udenom
+min_reward=500000000000000  # Minimum reward amount to withdraw and restake in udenom
 log_file="/var/log/cascadia_rewards_checker.log"
 
 # Get the available rewards
 p_rewards=$(cascadiad query distribution rewards $address)
 a_rewards=$(echo "$p_rewards" | sed -n '/total:/,/^$/p' | sed -n '2p' | sed 's/- amount: "//;s/"$//')
-rewards=$(echo $a_rewards | cut -d'.' -f1)
+rewards_wc=$(echo $a_rewards | cut -d'.' -f1)
+
+p_commission=$(cascadiad query distribution commission $validator)
+a_commission=$(echo "$p_commission" | sed -n '/commission:/,/^$/p' | sed -n '2p' | sed 's/- amount: "//;s/"$//')
+commission=$(echo $a_commission | cut -d'.' -f1)
+
+rewards=$((rewards_wc+commission))
 
 if [[ $rewards -ge $min_reward ]]; then
         # Withdraw and restake the rewards
@@ -31,6 +37,8 @@ if [[ $rewards -ge $min_reward ]]; then
                 echo "$(date): Restaking:" | tee -a $log_file
                 echo "Restake amoumt: $RestakAmount" | tee -a $log_file
                 cascadiad tx staking delegate $validator "$RestakAmount"aCC --from $address --gas auto --gas-adjustment=1.3 --gas-prices=10aCC -y <<< "$password" >> $log_file
+        else
+                echo "$(date): Restake amount ($RestakAmount udenom) is insufficient." | tee -a $log_file
         fi
 else
         # Log that the reward amount is too low
