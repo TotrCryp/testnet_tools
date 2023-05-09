@@ -1,6 +1,5 @@
-# testnet_tools
+# Testnet tools
 Tools used when participating in testnets
-
 
 # Cascadia rewards checker
 **cascadia_rewards_checker.sh**
@@ -11,8 +10,10 @@ Then the available balance of the address is checked and the available amount fo
 **setup_cascadia_rewards_checker.sh**
 The script ensures that the automatic setup command is executed and configures execution every 15 minutes using Cron.
 
-**Setup command:** . <(wget -qO- https://raw.githubusercontent.com/TotrCryp/testnet_tools/main/setup_cascadia_rewards_checker.sh)
-
+**Setup command:**
+```Shell
+. <(wget -qO- https://raw.githubusercontent.com/TotrCryp/testnet_tools/main/setup_cascadia_rewards_checker.sh)
+```
 
 # Cascadia random sender
 **cascadia_random_sender.sh**
@@ -30,4 +31,7 @@ To reduce this effect, the sending is not done immediately after the script is s
 **setup_cascadia_random_sender.sh**
 The script ensures that the automatic setup command is executed and configures execution every 20 minutes using Cron.
 
-**Setup command:** . <(wget -qO- https://raw.githubusercontent.com/TotrCryp/testnet_tools/main/setup_cascadia_random_sender)
+**Setup command:**
+```Shell
+. <(wget -qO- https://raw.githubusercontent.com/TotrCryp/testnet_tools/main/setup_cascadia_random_sender)
+```
