@@ -33,5 +33,5 @@ The script ensures that the automatic setup command is executed and configures e
 
 **Setup command:**
 ```Shell
-. <(wget -qO- https://raw.githubusercontent.com/TotrCryp/testnet_tools/main/setup_cascadia_random_sender.sh)
+. <(wget -qO- https://raw.githubusercontent.com/TotrCryp/testnet_tools/main/setup_cascadia_random_sender)
 ```
