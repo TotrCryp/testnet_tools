@@ -1,0 +1,26 @@
+#!/bin/bash
+
+totr_logo_link="https://raw.githubusercontent.com/TotrCryp/assets/main/totr_logo.sh"
+#wget -q --spider $totr_logo_link
+. <(wget -qO- $totr_logo_link)
+echo -e "Setup Cascadia random sender..."
+echo -e "The script is intended for use in the devnet/testnet of the Cascadia project."
+echo -e "The script sends 10000000aCC to a random address, every 20 minutes (approx)."
+echo -e "This provides some load on the network and brings it closer to real working conditions."
+
+read -r -p "Continue? [y/n]" response
+    case "$response" in
+        [yY][eE][sS]|[yY])
+            cd $HOME
+            wget -q https://raw.githubusercontent.com/TotrCryp/testnet_tools/main/cascadia_rewards_checker.sh && \
+            read -p "Enter address (looks like cascadia123...): " address && \
+            read -p "Enter keyring passphrase (should look like something incomprehensible): " password && \
+            sed -i "s/^address=\"\".*/address=\"$address\"/; s/^password=\"\".*/password=\"$password\"/" cascadia_rewards_checker.sh && \
+            chmod +x cascadia_rewards_checker.sh  && \
+            crontab -l | { cat; echo "*/20 * * * * $HOME/cascadia_rewards_checker.sh"; } | crontab -  && \
+            echo -e "Done!"
+            ;;
+        *)
+            echo \-e "Canceled"
+            ;;
+    esac
