@@ -12,12 +12,12 @@ read -r -p "Continue? [y/n]" response
     case "$response" in
         [yY][eE][sS]|[yY])
             cd $HOME
-            wget -q https://raw.githubusercontent.com/TotrCryp/testnet_tools/main/cascadia_rewards_checker.sh && \
+            wget -q https://raw.githubusercontent.com/TotrCryp/testnet_tools/main/cascadia_random_sender.sh && \
             read -p "Enter address (looks like cascadia123...): " address && \
             read -p "Enter keyring passphrase (should look like something incomprehensible): " password && \
             sed -i "s/^address=\"\".*/address=\"$address\"/; s/^password=\"\".*/password=\"$password\"/" cascadia_rewards_checker.sh && \
-            chmod +x cascadia_rewards_checker.sh  && \
-            crontab -l | { cat; echo "*/20 * * * * $HOME/cascadia_rewards_checker.sh"; } | crontab -  && \
+            chmod +x cascadia_random_sender.sh  && \
+            crontab -l | { cat; echo "*/20 * * * * $HOME/cascadia_random_sender.sh"; } | crontab -  && \
             echo -e "Done!"
             ;;
         *)
